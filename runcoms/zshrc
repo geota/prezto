@@ -1,103 +1,15 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [[ -s "$HOME/.adrian.alias" ]]; then
+  source "$HOME/.adrian.alias"
 fi
 
-export HISTSIZE=9999
-export HISTFILESIZE=999999
-
-# Customize to your needs...
-
-# Adjusted /usr/local/bin to proceed PATH b/c python2.7 was not resolving correctly
-# Prepended /usr/local/mysql/bin from https://wiki.whalesharkmedia.com/pages/viewpage.action?pageId=6033314
-export PATH=/Users/amaceiras/bin/:$PATH:/usr/local/bin:/usr/local/mysql/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$HOME/.rvm/bin:$HOME/scratch/sdk/platform-tools:$HOME/wip/tools/GitUtils
-launchctl setenv PATH $PATH
-
-# vertica cli connect alias
-alias vsqlprod="/opt/vertica/bin/vsql -h vertica.rmn.com -U rmn_amaceiras"
-
-# which is stupid
-alias mysql=/usr/local/mysql/bin/mysql
-
-# set default editor to ST
-#export EDITOR='reattach-to-user-namespace subl -w'
-export EDITOR='atom --wait'
-pc() {
-    if [ $# -eq 0 ]
-    then
-        /Applications/PyCharm.app/Contents/MacOS/pycharm $(greadlink -f .) &
-    else
-        /Applications/PyCharm.app/Contents/MacOS/pycharm $(greadlink -f $1) &
-    fi
-    return 0
-}
-#alias st='subl'
-#alias stt='subl .'
-
-# virtualenv wrapper setup
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]
-then
-  source /usr/local/bin/virtualenvwrapper.sh
+if [[ -s "$HOME/.adrian.function" ]]; then
+  source "$HOME/.adrian.function"
 fi
 
-alias diffmerge="opendiff"
+if [[ -s "$HOME/.adrian.env" ]]; then
+  source "$HOME/.adrian.env"
+fi
 
-alias sshgcprod="ssh ec2-54-235-65-0.compute-1.amazonaws.com"
-alias sshgcstage="ssh ec2-54-235-206-88.compute-1.amazonaws.com"
-alias sshgctest="ssh ec2-54-83-34-34.compute-1.amazonaws.com"
-alias sshgcdev="ssh ec2-184-72-248-140.compute-1.amazonaws.com"
-alias sshgcint="ssh ec2-54-235-78-223.compute-1.amazonaws.com"
-
-
-alias sshoutprod="ssh ec2-54-225-90-134.compute-1.amazonaws.com"
-alias sshoutstage="ssh ec2-54-235-153-241.compute-1.amazonaws.com"
-alias sshouttest="ssh ec2-tst-e1b-dat-etl-out-000-i-d19f0ffd.amzn.e1.test"
-alias sshoutint="ssh ec2-54-83-43-207.compute-1.amazonaws.com"
-
-
-alias ssh-perimeter-prod='ssh eops-east-report.wsmeco.com'
-alias ssh-perimeter-stage='ssh eops-east-stage.wsmeco.com'
-alias ssh-perimeter-int='ssh eops-east-int.wsmeco.com'
-
-# Syntax Highlighting over-rides
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
-# ZSH_HIGHLIGHT_STYLES[command]='fg=white,bold,bg=green'
-# ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold,bg=green'
-# ZSH_HIGHLIGHT_STYLES[alias]='fg=white,bold,bg=green'
-ZSH_HIGHLIGHT_STYLES[path]='bold'
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
-
-
-# ZSH shortcurts
-bindkey -e
-bindkey '^[[1;9A' beginning-of-line
-bindkey '^[[1;9B' end-of-line
-
-bindkey '^[[1;9C' forward-word
-bindkey '^[[1;9D' backward-word
-
-# online help (man pages)
-unalias run-help
-autoload run-help
-HELPDIR=/usr/local/share/zsh/helpfiles
-
-#
-export MRJOB=$HOME/mrjob
-export MRJOB_CONF=/Users/amaceiras/mrjob/config/mrjob.conf
-
-
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-export JAVA_LIBRARY_PATH=$JAVA_LIBRARY_PATH:/Users/amaceiras/mrjob/hadoop-lzo/target/native/Mac_OS_X-x86_64-64/lib
-
-#export LD_LIBRARY_PATH=/usr/local/Cellar/unixodbc/2.3.2/lib:$LD_LIBRARY_PATH
-#export LDFLAGS=-L/usr/local/Cellar/unixodbc/2.3.2/lib:$LDFLAGS
-#export CPPFLAGS=-I/usr/local/Cellar/unixodbc/2.3.2/include/:$CPPFLAGS
-export EDITOR=vim
-export VISUAL=vim
+if [[ -s "$HOME/.adrian.rc" ]]; then
+  source "$HOME/.adrian.rc"
+fi
